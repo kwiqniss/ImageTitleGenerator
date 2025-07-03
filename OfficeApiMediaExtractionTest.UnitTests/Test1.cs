@@ -9,7 +9,6 @@ namespace OfficeApiMediaExtractionTest.UnitTests
     public sealed class Test1
     {
         private const string ACS_ENDPOINT = "https://nazaravision.cognitiveservices.azure.com/"; //https://<your-vision-api-endpoint>.cognitiveservices.azure.com/";
-
         private const string ACS_API_KEY = "3zLPzIAfN7RjptLzX0k3mAUF1QeDRF8mtxfvywT8fSOeNPkBs5IQJQQJ99BGACYeBjFXJ3w3AAAFACOGBFkq"; // Your Azure Vision API key
 
         private readonly IWorker _worker;
