@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.14.36203.30
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OfficeApiMediaExtractionTest", "OfficeApiMediaExtractionTest\OfficeApiMediaExtractionTest.csproj", "{811F36B3-CFF9-429C-877B-C7C67DB2E3A5}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OfficeApiMediaExtractionTest.E2ETests", "OfficeApiMediaExtractionTest.UnitTests\OfficeApiMediaExtractionTest.E2ETests.csproj", "{657DBBD3-52E7-44B9-9BE8-CF1B73EACE6C}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{811F36B3-CFF9-429C-877B-C7C67DB2E3A5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{811F36B3-CFF9-429C-877B-C7C67DB2E3A5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{811F36B3-CFF9-429C-877B-C7C67DB2E3A5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{811F36B3-CFF9-429C-877B-C7C67DB2E3A5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{657DBBD3-52E7-44B9-9BE8-CF1B73EACE6C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{657DBBD3-52E7-44B9-9BE8-CF1B73EACE6C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{657DBBD3-52E7-44B9-9BE8-CF1B73EACE6C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{657DBBD3-52E7-44B9-9BE8-CF1B73EACE6C}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {8DBAEF64-B5A4-410A-A656-011F0FF4025C}
+	EndGlobalSection
+EndGlobal
