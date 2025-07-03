@@ -2,6 +2,7 @@
 using OfficeApiMediaExtractionTest.Interfaces;
 using OfficeApiMediaExtractionTest.Loggers;
 using OfficeApiMediaExtractionTest.Office;
+using Moq;
 
 namespace OfficeApiMediaExtractionTest.UnitTests
 {
@@ -15,10 +16,10 @@ namespace OfficeApiMediaExtractionTest.UnitTests
 
         public Test1()
         {
-            // Initialize the worker with the necessary dependencies
-            var docManager = new OfficeDocManager();
-            var imageAnalyzer = new AcsImageAnalyzer(ACS_ENDPOINT, ACS_API_KEY);
-            _worker = new Worker(docManager, imageAnalyzer, new List<ILogger> { new ConsoleLogger(), new DebugLogger() });
+            _worker = new Worker(
+                new OfficeDocManager(), 
+                new AcsImageAnalyzer(ACS_ENDPOINT, ACS_API_KEY), 
+                new List<ILogger> { new Mock<ILogger>().Object });
         }
 
         [TestMethod]
