@@ -44,9 +44,9 @@ namespace OfficeApiMediaExtractionTest
                         new LocalFileHandler(),
                         new List<IImageHandler>
                         {
-                        new DocxImageHandler(),
-                        new PptxImageHandler(),
-                        new XlsxImageHandler()
+                            new DocxImageHandler(),
+                            new PptxImageHandler(),
+                            new XlsxImageHandler()
                         }),
                     new AcsImageAnalyzer(_acsEndpoint, _acsApiKey),
                     _loggers);
