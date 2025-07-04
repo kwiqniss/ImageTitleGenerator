@@ -24,8 +24,7 @@ namespace OfficeApiMediaExtractionTest.AI.Acs
                 images == null ||
                 images.Count() < 1)
             {
-                //TODO: this might should be an exception, but for testing purposes, we're just going to continue on as if everything was okay
-                return true; 
+                return false; 
             }
 
             foreach (var image in images)
