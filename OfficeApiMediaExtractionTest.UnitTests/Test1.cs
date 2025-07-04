@@ -1,5 +1,6 @@
 ﻿using OfficeApiMediaExtractionTest.AI.Acs;
 using OfficeApiMediaExtractionTest.Interfaces;
+using OfficeApiMediaExtractionTest.IO;
 using OfficeApiMediaExtractionTest.Loggers;
 using OfficeApiMediaExtractionTest.Office;
 using Moq;
@@ -19,6 +20,7 @@ namespace OfficeApiMediaExtractionTest.UnitTests
             //var loggers = new List<ILogger> { new ConsoleLogger(), new DebugLogger() };
             _worker = new Worker(
                 new OfficeDocManager(
+                    new LocalFileHandler(),
                     new List<IImageHandler> 
                     { 
                         new DocxImageHandler(), 

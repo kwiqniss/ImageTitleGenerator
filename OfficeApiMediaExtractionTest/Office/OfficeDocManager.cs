@@ -16,9 +16,12 @@ namespace OfficeApiMediaExtractionTest.Office
      */
     public class OfficeDocManager : IDocManager
     {
+        private readonly IFileHandler _fileHandler;
         private readonly IEnumerable<IImageHandler> _imageHandlers;
-        public OfficeDocManager(IEnumerable<IImageHandler> imageHandlers)
+        
+        public OfficeDocManager(IFileHandler fileHandler, IEnumerable<IImageHandler> imageHandlers)
         {
+            _fileHandler = fileHandler;
             _imageHandlers = imageHandlers;
         }
         public FileInteractionResult CopyDoc(string sourcePath)
@@ -32,7 +35,7 @@ namespace OfficeApiMediaExtractionTest.Office
                 };
             }
 
-            if (!File.Exists(sourcePath))
+            if (!_fileHandler.Exists(sourcePath))
             {
                 return new FileInteractionResult
                 {
@@ -51,11 +54,11 @@ namespace OfficeApiMediaExtractionTest.Office
             {
                 destPath = Path.Combine(directory, $"{fileNameWithoutExt} (Copy {copyIndex}){extension}");
                 copyIndex++;
-            } while (File.Exists(destPath));
+            } while (_fileHandler.Exists(destPath));
 
             try
             {
-                File.Copy(sourcePath, destPath);
+                _fileHandler.Copy(sourcePath, destPath);
                 return new FileInteractionResult
                 {
                     IsSuccess = true,
