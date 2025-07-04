@@ -18,7 +18,13 @@ namespace OfficeApiMediaExtractionTest.UnitTests
         {
             //var loggers = new List<ILogger> { new ConsoleLogger(), new DebugLogger() };
             _worker = new Worker(
-                new OfficeDocManager(), 
+                new OfficeDocManager(
+                    new List<IImageHandler> 
+                    { 
+                        new DocxImageHandler(), 
+                        new PptxImageHandler(), 
+                        new XlsxImageHandler() 
+                    }), 
                 new AcsImageAnalyzer(ACS_ENDPOINT, ACS_API_KEY), 
                 new List<ILogger> { new Mock<ILogger>().Object });
         }

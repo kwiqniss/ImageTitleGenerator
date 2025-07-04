@@ -18,6 +18,7 @@ namespace OfficeApiMediaExtractionTest
             "3zLPzIAfN7RjptLzX0k3mAUF1QeDRF8mtxfvywT8fSOeNPkBs5IQJQQJ99BGACYeBjFXJ3w3AAAFACOGBFkq"; 
 
         private static IImageAnalyzer? _imageAnalyzer;
+        private static IEnumerable<IImageHandler>? _imageHandlers;
         private static IDocManager? _officeDocManager;
         private static List<ILogger>? _loggers;
         private static IWorker? _worker;
@@ -29,7 +30,14 @@ namespace OfficeApiMediaExtractionTest
         {
             //TODO: accept endpoint and key as arguments from the command line.
             _imageAnalyzer = new AcsImageAnalyzer(ACS_ENDPOINT, ACS_API_KEY);
-            _officeDocManager = new OfficeDocManager();
+            _imageHandlers = new List<IImageHandler>
+            {
+                new DocxImageHandler(),
+                new PptxImageHandler(),
+                new XlsxImageHandler()
+            };
+
+            _officeDocManager = new OfficeDocManager(_imageHandlers);
             _loggers = new List<ILogger>{ new ConsoleLogger(), new DebugLogger() };
             _worker = new Worker(_officeDocManager, _imageAnalyzer, _loggers);
 

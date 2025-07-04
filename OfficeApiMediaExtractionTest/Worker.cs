@@ -17,7 +17,9 @@ namespace OfficeApiMediaExtractionTest
         private readonly IImageAnalyzer _imageAnalyzer;
         private readonly List<ILogger> _loggers; 
 
-        public Worker(IDocManager docManager, IImageAnalyzer imageAnalyzer, IEnumerable<ILogger> loggers)
+        public Worker(IDocManager docManager, 
+            IImageAnalyzer imageAnalyzer, 
+            IEnumerable<ILogger> loggers)
         {
             _docManager = docManager ?? throw new ArgumentNullException(nameof(docManager));
             _imageAnalyzer = imageAnalyzer ?? throw new ArgumentNullException(nameof(imageAnalyzer));
