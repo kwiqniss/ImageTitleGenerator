@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace OfficeApiMediaExtractionTest.Office
 {
-    public class DocxImageHandler : OfficeDocumentImageHandler
+    public class DocxImageHandler : OfficeDocImageHandler
     {
         public override IEnumerable<string> SupportedFileExtensions { get; set; } = [".docx"];
 

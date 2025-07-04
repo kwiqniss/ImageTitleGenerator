@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace OfficeApiMediaExtractionTest.Office
 {
-    public class XlsxImageHandler: OfficeDocumentImageHandler
+    public class XlsxImageHandler: OfficeDocImageHandler
     {
         public override IEnumerable<string> SupportedFileExtensions { get; set; } = [".xlsx"];
 
