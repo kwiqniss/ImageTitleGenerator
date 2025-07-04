@@ -7,6 +7,13 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OfficeApiMediaExtractionTes
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OfficeApiMediaExtractionTest.E2ETests", "OfficeApiMediaExtractionTest.UnitTests\OfficeApiMediaExtractionTest.E2ETests.csproj", "{657DBBD3-52E7-44B9-9BE8-CF1B73EACE6C}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "sampleFiles", "sampleFiles", "{02EA681E-C7D8-13C7-8484-4AC65E1B71E8}"
+	ProjectSection(SolutionItems) = preProject
+		sampleFiles\sample.docx = sampleFiles\sample.docx
+		sampleFiles\sample.pptx = sampleFiles\sample.pptx
+		sampleFiles\sample.xlsx = sampleFiles\sample.xlsx
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
