@@ -13,7 +13,6 @@ namespace OfficeApiMediaExtractionTest.IO
     {
         public bool Exists(string filePath)
         {
-
             return File.Exists(filePath);
         }
 
