@@ -26,24 +26,6 @@ namespace OfficeApiMediaExtractionTest.Office.ImageHandlerImplementations
                     slideIndex++;
                     foreach (var documentImage in GetDocumentImages(slidePart, slidePart.ImageParts, slideIndex))
                         yield return documentImage;
-                    //int imageIndex = 0;
-                    //foreach (var imagePart in slidePart.ImageParts)
-                    //{
-                    //    string extension = GetImageExtension(imagePart.ContentType);
-                    //    using var imageStream = imagePart.GetStream();
-                    //    var ms = new MemoryStream();
-                    //    imageStream.CopyTo(ms);
-                    //    ms.Position = 0;
-
-                    //    var relId = slidePart.GetIdOfPart(imagePart);
-                    //    yield return new DocumentImage(
-                    //        extension,
-                    //        ms,
-                    //        relId,
-                    //        $"Slide{slideIndex}_Image{++imageIndex}",
-                    //        slideIndex
-                    //    );
-                    //}
                 }
             }
         }
