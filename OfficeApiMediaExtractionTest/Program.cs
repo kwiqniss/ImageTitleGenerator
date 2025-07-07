@@ -13,7 +13,7 @@ namespace OfficeApiMediaExtractionTest
     public class Program
     {
         private static string _docPath = string.Empty;
-        private static AcsConnectionInfo _acsConnectionDetails;
+        private static AcsConnectionInfo? _acsConnectionDetails;
         private static List<ILogger>? _loggers;
         private static IWorker? _worker;
 
