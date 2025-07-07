@@ -6,6 +6,7 @@ using OfficeApiMediaExtractionTest.Interfaces;
 using OfficeApiMediaExtractionTest.IO;
 using OfficeApiMediaExtractionTest.Loggers;
 using OfficeApiMediaExtractionTest.Office;
+using OfficeApiMediaExtractionTest.Office.ImageHandlerImplementations;
 using System.Diagnostics;
 
 namespace OfficeApiMediaExtractionTest

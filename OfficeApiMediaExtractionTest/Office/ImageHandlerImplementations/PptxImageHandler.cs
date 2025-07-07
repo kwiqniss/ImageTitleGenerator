@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace OfficeApiMediaExtractionTest.Office
+namespace OfficeApiMediaExtractionTest.Office.ImageHandlerImplementations
 {
     public class PptxImageHandler: OfficeDocImageHandler
     {

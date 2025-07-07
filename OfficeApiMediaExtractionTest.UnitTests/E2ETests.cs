@@ -5,6 +5,7 @@ using OfficeApiMediaExtractionTest.Loggers;
 using OfficeApiMediaExtractionTest.Office;
 using Moq;
 using OfficeApiMediaExtractionTest.DataTypes;
+using OfficeApiMediaExtractionTest.Office.ImageHandlerImplementations;
 
 namespace OfficeApiMediaExtractionTest.UnitTests
 {
