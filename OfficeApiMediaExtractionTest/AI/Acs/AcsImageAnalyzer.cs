@@ -2,7 +2,6 @@
 using Azure.AI.Vision.ImageAnalysis;
 using OfficeApiMediaExtractionTest.DataTypes;
 using OfficeApiMediaExtractionTest.Interfaces;
-using System.Net;
 
 namespace OfficeApiMediaExtractionTest.AI.Acs
 {

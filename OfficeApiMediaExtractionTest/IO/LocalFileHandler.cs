@@ -1,11 +1,5 @@
-﻿using DocumentFormat.OpenXml.Vml;
-using OfficeApiMediaExtractionTest.DataTypes;
+﻿using OfficeApiMediaExtractionTest.DataTypes;
 using OfficeApiMediaExtractionTest.Interfaces;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace OfficeApiMediaExtractionTest.IO
 {

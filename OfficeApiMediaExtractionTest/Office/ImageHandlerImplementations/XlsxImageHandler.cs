@@ -1,11 +1,5 @@
 ﻿using DocumentFormat.OpenXml.Packaging;
-using DocumentFormat.OpenXml.Drawing.Spreadsheet;
 using OfficeApiMediaExtractionTest.DataTypes;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using DocumentFormat.OpenXml.Drawing;
 
 namespace OfficeApiMediaExtractionTest.Office.ImageHandlerImplementations

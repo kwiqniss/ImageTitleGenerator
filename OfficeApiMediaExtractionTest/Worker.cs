@@ -1,13 +1,5 @@
-﻿using OfficeApiMediaExtractionTest.AI.Acs;
-using OfficeApiMediaExtractionTest.DataTypes;
+﻿using OfficeApiMediaExtractionTest.DataTypes;
 using OfficeApiMediaExtractionTest.Interfaces;
-using OfficeApiMediaExtractionTest.Office;
-using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace OfficeApiMediaExtractionTest
 {

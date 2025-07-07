@@ -1,9 +1,8 @@
-﻿using OfficeApiMediaExtractionTest.AI.Acs;
+﻿using Moq;
+using OfficeApiMediaExtractionTest.AI.Acs;
 using OfficeApiMediaExtractionTest.Interfaces;
 using OfficeApiMediaExtractionTest.IO;
-using OfficeApiMediaExtractionTest.Loggers;
 using OfficeApiMediaExtractionTest.Office;
-using Moq;
 using OfficeApiMediaExtractionTest.DataTypes;
 using OfficeApiMediaExtractionTest.Office.ImageHandlerImplementations;
 

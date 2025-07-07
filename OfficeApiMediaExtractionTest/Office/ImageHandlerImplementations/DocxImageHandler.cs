@@ -1,16 +1,9 @@
 ﻿using DocumentFormat.OpenXml;
 using DocumentFormat.OpenXml.Drawing;
 using DocumentFormat.OpenXml.Drawing.Wordprocessing;
-//using DocumentFormat.OpenXml.Office.Drawing;
 using DocumentFormat.OpenXml.Packaging;
 using DocumentFormat.OpenXml.Wordprocessing;
 using OfficeApiMediaExtractionTest.DataTypes;
-using OfficeApiMediaExtractionTest.Interfaces;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace OfficeApiMediaExtractionTest.Office.ImageHandlerImplementations
 {

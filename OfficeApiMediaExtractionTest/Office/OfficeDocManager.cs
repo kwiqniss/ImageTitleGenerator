@@ -1,12 +1,5 @@
-using DocumentFormat.OpenXml.Packaging;
-using DocumentFormat.OpenXml.Wordprocessing;
-using DocumentFormat.OpenXml.Presentation;
-using DocumentFormat.OpenXml.Spreadsheet;
 using OfficeApiMediaExtractionTest.DataTypes;
 using OfficeApiMediaExtractionTest.Interfaces;
-using System.IO;
-using System.Linq;
-using System.Collections.Generic;
 using Path = System.IO.Path;
 
 namespace OfficeApiMediaExtractionTest.Office

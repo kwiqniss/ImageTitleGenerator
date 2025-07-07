@@ -1,5 +1,4 @@
 ﻿// See https://aka.ms/new-console-template for more information
-using Azure.AI.Vision.ImageAnalysis;
 using OfficeApiMediaExtractionTest.AI.Acs;
 using OfficeApiMediaExtractionTest.DataTypes;
 using OfficeApiMediaExtractionTest.Interfaces;
@@ -7,7 +6,6 @@ using OfficeApiMediaExtractionTest.IO;
 using OfficeApiMediaExtractionTest.Loggers;
 using OfficeApiMediaExtractionTest.Office;
 using OfficeApiMediaExtractionTest.Office.ImageHandlerImplementations;
-using System.Diagnostics;
 
 namespace OfficeApiMediaExtractionTest
 {
