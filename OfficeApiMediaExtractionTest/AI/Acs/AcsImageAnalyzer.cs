@@ -20,12 +20,8 @@ namespace OfficeApiMediaExtractionTest.AI.Acs
 
         public async Task<bool> AddImageDescriptionsAsync(IEnumerable<DocumentImage> images)
         {
-            if (_client == null ||
-                images == null ||
-                images.Count() < 1)
-            {
-                return false; 
-            }
+            if (_client == null || images == null || images.Count() < 1)
+                return false;
 
             foreach (var image in images)
             {
