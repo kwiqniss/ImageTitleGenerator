@@ -13,8 +13,7 @@ namespace OfficeApiMediaExtractionTest
     public class Program
     {
         private static string _docPath = string.Empty;
-        private static string _acsEndpoint = string.Empty;
-        private static string _acsApiKey = string.Empty;
+        private static AcsConnectionInfo _acsConnectionDetails;
         private static List<ILogger>? _loggers;
         private static IWorker? _worker;
 
@@ -31,8 +30,7 @@ namespace OfficeApiMediaExtractionTest
             else
             {
                 _docPath = args[0];
-                _acsEndpoint = args[1];
-                _acsApiKey = args[2];
+                _acsConnectionDetails = new AcsConnectionInfo(args[1], args[2]);
                 _loggers = new List<ILogger>
                 {
                     new ConsoleLogger(),
@@ -48,7 +46,7 @@ namespace OfficeApiMediaExtractionTest
                             new PptxImageHandler(),
                             new XlsxImageHandler()
                         }),
-                    new AcsImageAnalyzer(_acsEndpoint, _acsApiKey),
+                    new AcsImageAnalyzer(_acsConnectionDetails),
                     _loggers);
 
                 

@@ -10,8 +10,11 @@ namespace OfficeApiMediaExtractionTest.AI.Acs
     {
         private readonly ImageAnalysisClient _client;
 
-        public AcsImageAnalyzer(string endpoint, string apiKey)
+        public AcsImageAnalyzer(AcsConnectionInfo connectionDetails)
         {
+            var endpoint = connectionDetails.Endpoint;
+            var apiKey = connectionDetails.ApiKey;
+
             if (string.IsNullOrWhiteSpace(endpoint)) throw new ArgumentNullException(nameof(endpoint));
             if (string.IsNullOrWhiteSpace(apiKey)) throw new ArgumentNullException(nameof(apiKey));
 
