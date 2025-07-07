@@ -4,6 +4,7 @@ using OfficeApiMediaExtractionTest.IO;
 using OfficeApiMediaExtractionTest.Loggers;
 using OfficeApiMediaExtractionTest.Office;
 using Moq;
+using OfficeApiMediaExtractionTest.DataTypes;
 
 namespace OfficeApiMediaExtractionTest.UnitTests
 {
@@ -27,7 +28,7 @@ namespace OfficeApiMediaExtractionTest.UnitTests
                         new PptxImageHandler(), 
                         new XlsxImageHandler() 
                     }), 
-                new AcsImageAnalyzer(ACS_ENDPOINT, ACS_API_KEY), 
+                new AcsImageAnalyzer(new AcsConnectionInfo(ACS_ENDPOINT, ACS_API_KEY)), 
                 new List<ILogger> { new Mock<ILogger>().Object });
         }
 
