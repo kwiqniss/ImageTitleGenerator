@@ -28,24 +28,28 @@ namespace OfficeApiMediaExtractionTest.Office.ImageHandlerImplementations
                     if (drawingsPart == null)
                         continue;
 
-                    int imageIndex = 0;
-                    foreach (var imagePart in drawingsPart.ImageParts)
-                    {
-                        string extension = GetImageExtension(imagePart.ContentType);
-                        using var imageStream = imagePart.GetStream();
-                        var ms = new MemoryStream();
-                        imageStream.CopyTo(ms);
-                        ms.Position = 0;
+                    foreach (var documentImage in GetDocumentImages(drawingsPart, drawingsPart.ImageParts, sheetIndex))
+                        yield return documentImage;
 
-                        var relId = drawingsPart.GetIdOfPart(imagePart);
-                        yield return new DocumentImage(
-                            extension,
-                            ms,
-                            relId,
-                            $"Sheet{sheetIndex}_Image{++imageIndex}",
-                            sheetIndex
-                        );
-                    }
+                    //int imageIndex = 0;
+                    //foreach (var imagePart in drawingsPart.ImageParts)
+                    //{
+                    //    string extension = GetImageExtension(imagePart.ContentType);
+                    //    using var imageStream = imagePart.GetStream();
+                    //    var ms = new MemoryStream();
+                    //    imageStream.CopyTo(ms);
+                    //    ms.Position = 0;
+
+                    //    var relId = GetIdOfPart(drawingsPart, imagePart);
+                    //    var relId = drawingsPart.GetIdOfPart(imagePart);
+                    //    yield return new DocumentImage(
+                    //        extension,
+                    //        ms,
+                    //        relId,
+                    //        $"Sheet{sheetIndex}_Image{++imageIndex}",
+                    //        sheetIndex
+                    //    );
+                    //}
                 }
             }
         }
