@@ -1,4 +1,5 @@
-﻿using DocumentFormat.OpenXml.Packaging;
+﻿using DocumentFormat.OpenXml.Drawing;
+using DocumentFormat.OpenXml.Packaging;
 using OfficeApiMediaExtractionTest.DataTypes;
 using System;
 using System.Collections.Generic;
@@ -49,11 +50,11 @@ namespace OfficeApiMediaExtractionTest.Office.ImageHandlerImplementations
                 foreach (var slidePart in presentationPart.SlideParts)
                 {
                     slideIndex++;
-                    var blips = slidePart.Slide.Descendants<DocumentFormat.OpenXml.Drawing.Blip>();
-                    foreach (var blip in blips)
+                    foreach (var blip in GetBlips(slidePart.Slide))
                     {
-                        var relId = blip.Embed?.Value;
+                        var relId = GetRelId(blip);
                         if (string.IsNullOrEmpty(relId)) continue;
+
                         var docImage = imageList.FirstOrDefault(img => img.RelId == relId && img.SheetSlideIndex == slideIndex);
                         if (docImage == null) continue;
 

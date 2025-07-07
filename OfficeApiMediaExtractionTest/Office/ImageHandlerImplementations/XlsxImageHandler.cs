@@ -57,23 +57,23 @@ namespace OfficeApiMediaExtractionTest.Office.ImageHandlerImplementations
                     if (drawingsPart == null)
                         continue;
 
-                    var pictures = drawingsPart.WorksheetDrawing.Descendants<DocumentFormat.OpenXml.Drawing.Spreadsheet.Picture>();
-                    foreach (var pic in pictures)
+                    var blips = GetBlips(drawingsPart.WorksheetDrawing);
+                    foreach (var blip in blips)
                     {
-                        var blip = pic.BlipFill?.Blip;
-                        var relId = blip?.Embed?.Value;
+                        var relId = GetRelId(blip);
                         if (string.IsNullOrEmpty(relId)) continue;
+
                         var docImage = imageList.FirstOrDefault(img => img.RelId == relId && img.SheetSlideIndex == sheetIndex);
                         if (docImage == null) continue;
 
-                        var nvdProps = pic.NonVisualPictureProperties?.NonVisualDrawingProperties;
-                        if (nvdProps == null)
+                        var nvdProps = blip.Ancestors<DocumentFormat.OpenXml.Drawing.Spreadsheet.Picture>()
+                            .Select(pic => pic.NonVisualPictureProperties?.NonVisualDrawingProperties)
+                            .FirstOrDefault(nv => nv != null);
+                        if (nvdProps != null)
                         {
-                            nvdProps = new DocumentFormat.OpenXml.Drawing.Spreadsheet.NonVisualDrawingProperties();
-                            pic.Append(nvdProps);
+                            nvdProps.Description = string.Empty;
+                            nvdProps.Title = docImage.Title;
                         }
-                        nvdProps.Description = string.Empty;
-                        nvdProps.Title = docImage.Title;
                     }
                     drawingsPart.WorksheetDrawing.Save();
                 }

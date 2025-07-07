@@ -1,4 +1,6 @@
-﻿using DocumentFormat.OpenXml.Packaging;
+﻿using DocumentFormat.OpenXml;
+using DocumentFormat.OpenXml.Drawing;
+using DocumentFormat.OpenXml.Packaging;
 using OfficeApiMediaExtractionTest.DataTypes;
 using OfficeApiMediaExtractionTest.Interfaces;
 using System;
@@ -17,12 +19,28 @@ namespace OfficeApiMediaExtractionTest.Office
 
         public abstract FileInteractionResult SaveImageTitles(IEnumerable<DocumentImage> images, string docPath);
 
-        public string GetIdOfPart(OpenXmlPart xmlPart, ImagePart imagePart)
+        public static IEnumerable<OpenXmlCompositeElement> GetDrawings<T>(OpenXmlPartRootElement mainPart) where T : OpenXmlCompositeElement
+        {
+            return mainPart.Descendants<T>();
+        }
+
+        public static IEnumerable<Blip> GetBlips(OpenXmlCompositeElement element)
+        {
+            return element.Descendants<Blip>();
+        }
+
+        public static string? GetRelId(Blip blip)
+        {
+            //var blip = drawing.Descendants<Blip>().FirstOrDefault();
+            return blip?.Embed?.Value;
+        }
+
+        public static string GetIdOfPart(OpenXmlPart xmlPart, ImagePart imagePart)
         {
             return xmlPart.GetIdOfPart(imagePart);
         }
 
-        public IEnumerable<DocumentImage> GetDocumentImages(
+        public static IEnumerable<DocumentImage> GetDocumentImages(
             OpenXmlPart xmlPart, 
             IEnumerable<ImagePart> imageParts, 
             int pageIndex = -1)
@@ -47,7 +65,7 @@ namespace OfficeApiMediaExtractionTest.Office
             }
         }
 
-        internal static string GetImageExtension(string contentType)
+        public static string GetImageExtension(string contentType)
         {
             return contentType switch
             {

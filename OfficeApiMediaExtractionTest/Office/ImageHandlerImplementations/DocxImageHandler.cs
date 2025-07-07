@@ -1,4 +1,7 @@
-﻿using DocumentFormat.OpenXml.Packaging;
+﻿using DocumentFormat.OpenXml;
+using DocumentFormat.OpenXml.Drawing;
+using DocumentFormat.OpenXml.Drawing.Wordprocessing;
+using DocumentFormat.OpenXml.Packaging;
 using OfficeApiMediaExtractionTest.DataTypes;
 using OfficeApiMediaExtractionTest.Interfaces;
 using System;
@@ -41,24 +44,21 @@ namespace OfficeApiMediaExtractionTest.Office.ImageHandlerImplementations
                 }
 
                 var imageList = images.ToList();
-                var drawings = mainPart.Document.Descendants<DocumentFormat.OpenXml.Wordprocessing.Drawing>();
+                var drawings = GetDrawings<DocumentFormat.OpenXml.Wordprocessing.Drawing>(mainPart.Document);
 
                 foreach (var drawing in drawings)
                 {
-                    var blip = drawing.Descendants<DocumentFormat.OpenXml.Drawing.Blip>().FirstOrDefault();
-                    if (blip?.Embed == null) continue;
-                    var relId = blip.Embed.Value;
+                    var blip = GetBlips(drawing).FirstOrDefault();
+                    if (blip == null) continue;
+
+                    var relId = GetRelId(blip);
+                    if (relId == null) continue;
+
                     var docImage = imageList.FirstOrDefault(img => img.RelId == relId);
                     if (docImage == null) continue;
 
-                    var docProps = drawing.Descendants<DocumentFormat.OpenXml.Drawing.Wordprocessing.DocProperties>().FirstOrDefault();
-                    if (docProps == null)
-                    {
-                        docProps = new DocumentFormat.OpenXml.Drawing.Wordprocessing.DocProperties();
-                        drawing.Append(docProps);
-                    }
-                    docProps.Description = string.Empty;
-                    docProps.Title = docImage.Title;
+                    if (drawing.Descendants<DocProperties>().FirstOrDefault() is { } docProps) 
+                        (docProps.Description, docProps.Title) = (string.Empty, docImage.Title);
                 }
 
                 try
