@@ -9,14 +9,14 @@ using OfficeApiMediaExtractionTest.DataTypes;
 namespace OfficeApiMediaExtractionTest.UnitTests
 {
     [TestClass]
-    public sealed class Test1
+    public sealed class E2ETests
     {
         private const string ACS_ENDPOINT = "https://nazaravision.cognitiveservices.azure.com/"; //https://<your-vision-api-endpoint>.cognitiveservices.azure.com/";
         private const string ACS_API_KEY = "3zLPzIAfN7RjptLzX0k3mAUF1QeDRF8mtxfvywT8fSOeNPkBs5IQJQQJ99BGACYeBjFXJ3w3AAAFACOGBFkq"; // Your Azure Vision API key
 
         private readonly IWorker _worker;
 
-        public Test1()
+        public E2ETests()
         {
             //var loggers = new List<ILogger> { new ConsoleLogger(), new DebugLogger() };
             _worker = new Worker(
