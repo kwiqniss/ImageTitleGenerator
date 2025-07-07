@@ -1,10 +1,12 @@
 ﻿using DocumentFormat.OpenXml.Packaging;
+using DocumentFormat.OpenXml.Drawing.Spreadsheet;
 using OfficeApiMediaExtractionTest.DataTypes;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using DocumentFormat.OpenXml.Drawing;
 
 namespace OfficeApiMediaExtractionTest.Office.ImageHandlerImplementations
 {
@@ -66,18 +68,25 @@ namespace OfficeApiMediaExtractionTest.Office.ImageHandlerImplementations
                         var docImage = imageList.FirstOrDefault(img => img.RelId == relId && img.SheetSlideIndex == sheetIndex);
                         if (docImage == null) continue;
 
-                        var nvdProps = blip.Ancestors<DocumentFormat.OpenXml.Drawing.Spreadsheet.Picture>()
-                            .Select(pic => pic.NonVisualPictureProperties?.NonVisualDrawingProperties)
-                            .FirstOrDefault(nv => nv != null);
-                        if (nvdProps != null)
-                        {
-                            nvdProps.Description = string.Empty;
-                            nvdProps.Title = docImage.Title;
-                        }
+                        UpdateTitleProperty(blip, docImage.Title);
                     }
                     drawingsPart.WorksheetDrawing.Save();
                 }
                 return new FileInteractionResult { IsSuccess = true };
+            }
+        }
+
+        protected override void UpdateTitleProperty(
+            Blip blip,
+            string title)
+        {
+            var nvdProps = blip.Ancestors<DocumentFormat.OpenXml.Drawing.Spreadsheet.Picture>()
+                            .Select(pic => pic.NonVisualPictureProperties?.NonVisualDrawingProperties)
+                            .FirstOrDefault(nv => nv != null);
+            if (nvdProps != null)
+            {
+                nvdProps.Description = string.Empty;
+                nvdProps.Title = title;
             }
         }
     }

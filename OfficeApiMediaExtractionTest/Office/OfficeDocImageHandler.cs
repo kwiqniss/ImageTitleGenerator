@@ -19,6 +19,8 @@ namespace OfficeApiMediaExtractionTest.Office
 
         public abstract FileInteractionResult SaveImageTitles(IEnumerable<DocumentImage> images, string docPath);
 
+        protected abstract void UpdateTitleProperty(Blip blip, string title);
+
         public static IEnumerable<OpenXmlCompositeElement> GetDrawings<T>(OpenXmlPartRootElement mainPart) where T : OpenXmlCompositeElement
         {
             return mainPart.Descendants<T>();
@@ -31,7 +33,6 @@ namespace OfficeApiMediaExtractionTest.Office
 
         public static string? GetRelId(Blip blip)
         {
-            //var blip = drawing.Descendants<Blip>().FirstOrDefault();
             return blip?.Embed?.Value;
         }
 

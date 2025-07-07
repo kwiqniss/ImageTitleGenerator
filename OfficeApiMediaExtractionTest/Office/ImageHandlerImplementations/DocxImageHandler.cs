@@ -1,7 +1,9 @@
 ﻿using DocumentFormat.OpenXml;
 using DocumentFormat.OpenXml.Drawing;
 using DocumentFormat.OpenXml.Drawing.Wordprocessing;
+//using DocumentFormat.OpenXml.Office.Drawing;
 using DocumentFormat.OpenXml.Packaging;
+using DocumentFormat.OpenXml.Wordprocessing;
 using OfficeApiMediaExtractionTest.DataTypes;
 using OfficeApiMediaExtractionTest.Interfaces;
 using System;
@@ -14,6 +16,8 @@ namespace OfficeApiMediaExtractionTest.Office.ImageHandlerImplementations
 {
     public class DocxImageHandler : OfficeDocImageHandler
     {
+        private OpenXmlCompositeElement? _activeDrawing { get; set; }
+
         public override IEnumerable<string> SupportedFileExtensions { get; set; } = [".docx"];
 
         public override IEnumerable<DocumentImage> GetImages(string docPath)
@@ -44,10 +48,12 @@ namespace OfficeApiMediaExtractionTest.Office.ImageHandlerImplementations
                 }
 
                 var imageList = images.ToList();
-                var drawings = GetDrawings<DocumentFormat.OpenXml.Wordprocessing.Drawing>(mainPart.Document);
+                var drawings = GetDrawings<Drawing>(mainPart.Document);
 
                 foreach (var drawing in drawings)
                 {
+                    if (drawing == null) continue;
+
                     var blip = GetBlips(drawing).FirstOrDefault();
                     if (blip == null) continue;
 
@@ -57,8 +63,7 @@ namespace OfficeApiMediaExtractionTest.Office.ImageHandlerImplementations
                     var docImage = imageList.FirstOrDefault(img => img.RelId == relId);
                     if (docImage == null) continue;
 
-                    if (drawing.Descendants<DocProperties>().FirstOrDefault() is { } docProps) 
-                        (docProps.Description, docProps.Title) = (string.Empty, docImage.Title);
+                    UpdateTitleProperty(drawing, blip, docImage.Title);
                 }
 
                 try
@@ -76,6 +81,19 @@ namespace OfficeApiMediaExtractionTest.Office.ImageHandlerImplementations
                     };
                 }
             }
+        }
+
+        protected override void UpdateTitleProperty(Blip blip, string title)
+        {
+            if (_activeDrawing?.Descendants<DocProperties>().FirstOrDefault() is { } docProps)
+                (docProps.Description, docProps.Title) = (string.Empty, title);
+        }
+
+        private void UpdateTitleProperty(OpenXmlCompositeElement drawing, Blip blip, string title)
+        {
+            _activeDrawing = drawing;
+            UpdateTitleProperty(blip, title);
+            _activeDrawing = null;
         }
     }
 }

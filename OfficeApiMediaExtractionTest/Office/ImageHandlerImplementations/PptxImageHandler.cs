@@ -58,30 +58,37 @@ namespace OfficeApiMediaExtractionTest.Office.ImageHandlerImplementations
                         var docImage = imageList.FirstOrDefault(img => img.RelId == relId && img.SheetSlideIndex == slideIndex);
                         if (docImage == null) continue;
 
-                        // Try Drawing.Pictures.Picture first
-                        var picNvProps = blip.Ancestors<DocumentFormat.OpenXml.Drawing.Pictures.Picture>()
-                            .Select(pic => pic.NonVisualPictureProperties?.NonVisualDrawingProperties)
-                            .FirstOrDefault(nv => nv != null);
-                        if (picNvProps != null)
-                        {
-                            picNvProps.Description = string.Empty;
-                            picNvProps.Title = docImage.Title;
-                            continue;
-                        }
-
-                        // Try Presentation.Picture second
-                        var presNvProps = blip.Ancestors<DocumentFormat.OpenXml.Presentation.Picture>()
-                            .Select(pic => pic.NonVisualPictureProperties?.NonVisualDrawingProperties)
-                            .FirstOrDefault(nv => nv != null);
-                        if (presNvProps != null)
-                        {
-                            presNvProps.Description = string.Empty;
-                            presNvProps.Title = docImage.Title;
-                        }
+                        UpdateTitleProperty(blip, docImage.Title);
                     }
                     slidePart.Slide.Save();
                 }
                 return new FileInteractionResult { IsSuccess = true };
+            }
+        }
+
+        protected override void UpdateTitleProperty(
+            Blip blip,
+            string title)
+        {
+            // Try Drawing.Pictures.Picture first
+            var picNvProps = blip.Ancestors<DocumentFormat.OpenXml.Drawing.Pictures.Picture>()
+                .Select(pic => pic.NonVisualPictureProperties?.NonVisualDrawingProperties)
+                .FirstOrDefault(nv => nv != null);
+            if (picNvProps != null)
+            {
+                picNvProps.Description = string.Empty;
+                picNvProps.Title = title;
+                return;
+            }
+
+            // Try Presentation.Picture second
+            var presNvProps = blip.Ancestors<DocumentFormat.OpenXml.Presentation.Picture>()
+                .Select(pic => pic.NonVisualPictureProperties?.NonVisualDrawingProperties)
+                .FirstOrDefault(nv => nv != null);
+            if (presNvProps != null)
+            {
+                presNvProps.Description = string.Empty;
+                presNvProps.Title = title;
             }
         }
     }
