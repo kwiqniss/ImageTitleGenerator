@@ -7,7 +7,7 @@ using ImageAnalyzer.Loggers;
 using ImageAnalyzer.Office;
 using ImageAnalyzer.Office.ImageHandlerImplementations;
 
-namespace OfficeApiMediaExtractionProgram
+namespace ImageAnalyzerProgram
 {
     public class Program
     {

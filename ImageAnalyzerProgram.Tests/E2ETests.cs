@@ -6,7 +6,7 @@ using ImageAnalyzer.Office;
 using ImageAnalyzer.DataTypes;
 using ImageAnalyzer.Office.ImageHandlerImplementations;
 
-namespace OfficeApiMediaExtractionTests
+namespace ImageAnalyzerProgram.Tests
 {
     [TestClass]
     public sealed class E2ETests
@@ -19,7 +19,7 @@ namespace OfficeApiMediaExtractionTests
         public E2ETests()
         {
             //var loggers = new List<ILogger> { new ConsoleLogger(), new DebugLogger() };
-            _worker = new Worker(
+            _worker = new ImageAnalyzerProgram.Worker(
                 new OfficeDocManager(
                     new LocalFileHandler(),
                     new List<IImageHandler> 

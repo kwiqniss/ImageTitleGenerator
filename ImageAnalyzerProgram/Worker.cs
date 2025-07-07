@@ -1,7 +1,7 @@
 ﻿using ImageAnalyzer.DataTypes;
 using ImageAnalyzer.Interfaces;
 
-namespace OfficeApiMediaExtractionProgram
+namespace ImageAnalyzerProgram
 {
     public class Worker : IWorker
     {

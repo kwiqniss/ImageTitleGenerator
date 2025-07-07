@@ -3,10 +3,6 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.14.36203.30
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OfficeApiMediaExtractionTest", "OfficeApiMediaExtractionTest\OfficeApiMediaExtractionTest.csproj", "{811F36B3-CFF9-429C-877B-C7C67DB2E3A5}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OfficeApiMediaExtractionTest.E2ETests", "OfficeApiMediaExtractionTest.UnitTests\OfficeApiMediaExtractionTest.E2ETests.csproj", "{657DBBD3-52E7-44B9-9BE8-CF1B73EACE6C}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "sampleFiles", "sampleFiles", "{02EA681E-C7D8-13C7-8484-4AC65E1B71E8}"
 	ProjectSection(SolutionItems) = preProject
 		sampleFiles\sample.docx = sampleFiles\sample.docx
@@ -14,20 +10,30 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "sampleFiles", "sampleFiles"
 		sampleFiles\sample.xlsx = sampleFiles\sample.xlsx
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ImageAnalyzer", "ImageAnalyzer\ImageAnalyzer.csproj", "{A00D3A9D-DB86-4FB1-94F9-C00C79D6CECA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ImageAnalyzerProgram", "ImageAnalyzerProgram\ImageAnalyzerProgram.csproj", "{9F5054F0-DCDA-AAC4-7AD4-80F5D352E545}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ImageAnalyzerProgram.Tests", "ImageAnalyzerProgram.Tests\ImageAnalyzerProgram.Tests.csproj", "{257D6A74-141B-CF26-60B3-1278366C40AE}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{811F36B3-CFF9-429C-877B-C7C67DB2E3A5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{811F36B3-CFF9-429C-877B-C7C67DB2E3A5}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{811F36B3-CFF9-429C-877B-C7C67DB2E3A5}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{811F36B3-CFF9-429C-877B-C7C67DB2E3A5}.Release|Any CPU.Build.0 = Release|Any CPU
-		{657DBBD3-52E7-44B9-9BE8-CF1B73EACE6C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{657DBBD3-52E7-44B9-9BE8-CF1B73EACE6C}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{657DBBD3-52E7-44B9-9BE8-CF1B73EACE6C}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{657DBBD3-52E7-44B9-9BE8-CF1B73EACE6C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A00D3A9D-DB86-4FB1-94F9-C00C79D6CECA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A00D3A9D-DB86-4FB1-94F9-C00C79D6CECA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A00D3A9D-DB86-4FB1-94F9-C00C79D6CECA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A00D3A9D-DB86-4FB1-94F9-C00C79D6CECA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9F5054F0-DCDA-AAC4-7AD4-80F5D352E545}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9F5054F0-DCDA-AAC4-7AD4-80F5D352E545}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9F5054F0-DCDA-AAC4-7AD4-80F5D352E545}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9F5054F0-DCDA-AAC4-7AD4-80F5D352E545}.Release|Any CPU.Build.0 = Release|Any CPU
+		{257D6A74-141B-CF26-60B3-1278366C40AE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{257D6A74-141B-CF26-60B3-1278366C40AE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{257D6A74-141B-CF26-60B3-1278366C40AE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{257D6A74-141B-CF26-60B3-1278366C40AE}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
