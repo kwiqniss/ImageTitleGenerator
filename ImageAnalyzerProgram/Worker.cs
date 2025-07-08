@@ -1,5 +1,6 @@
 ﻿using ImageAnalyzer.DataTypes;
 using ImageAnalyzer.Interfaces;
+using ImageAnalyzerProgram.Loggers;
 
 namespace ImageAnalyzerProgram
 {

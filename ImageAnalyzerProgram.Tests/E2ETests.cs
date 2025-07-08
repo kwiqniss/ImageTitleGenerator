@@ -5,7 +5,7 @@ using ImageAnalyzer.IO;
 using ImageAnalyzer.Office;
 using ImageAnalyzer.DataTypes;
 using ImageAnalyzer.Office.ImageHandlerImplementations;
-using ImageAnalyzer.Loggers;
+using ImageAnalyzerProgram.Loggers;
 
 namespace ImageAnalyzerProgram.Tests
 {

@@ -3,9 +3,9 @@ using ImageAnalyzer.AI.Acs;
 using ImageAnalyzer.DataTypes;
 using ImageAnalyzer.Interfaces;
 using ImageAnalyzer.IO;
-using ImageAnalyzer.Loggers;
 using ImageAnalyzer.Office;
 using ImageAnalyzer.Office.ImageHandlerImplementations;
+using ImageAnalyzerProgram.Loggers;
 
 namespace ImageAnalyzerProgram
 {

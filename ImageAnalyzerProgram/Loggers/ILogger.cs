@@ -1,4 +1,4 @@
-﻿namespace ImageAnalyzer.Interfaces
+﻿namespace ImageAnalyzerProgram.Loggers
 {
     public interface ILogger
     {

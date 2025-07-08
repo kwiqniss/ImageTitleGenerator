@@ -1,6 +1,4 @@
-﻿using ImageAnalyzer.Interfaces;
-
-namespace ImageAnalyzer.Loggers
+﻿namespace ImageAnalyzerProgram.Loggers
 {
     public class ConsoleLogger : ILogger
     {

@@ -1,7 +1,6 @@
-﻿using ImageAnalyzer.Interfaces;
-using System.Diagnostics;
+﻿using System.Diagnostics;
 
-namespace ImageAnalyzer.Loggers
+namespace ImageAnalyzerProgram.Loggers
 {
     public class DebugLogger : ILogger
     {
