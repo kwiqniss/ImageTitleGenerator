@@ -19,7 +19,7 @@ namespace ImageAnalyzerProgram.Tests
         public E2ETests()
         {
             //var loggers = new List<ILogger> { new ConsoleLogger(), new DebugLogger() };
-            _worker = new ImageAnalyzerProgram.Worker(
+            _worker = new Worker(
                 new OfficeDocManager(
                     new LocalFileHandler(),
                     new List<IImageHandler> 

@@ -1,8 +1,0 @@
-{
-  "profiles": {
-    "OfficeApiMediaExtractionTest": {
-      "commandName": "Project",
-      "commandLineArgs": "C:\\Users\\dhollowe\\Documents\\OfficeDocImagePlayground\\sample.docx"
-    }
-  }
-}

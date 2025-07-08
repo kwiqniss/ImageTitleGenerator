@@ -6,6 +6,16 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <PropertyGroup>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <PackageId>ImageAnalyzer</PackageId>
+    <Version>1.0.0</Version>
+    <Authors>David Hollowell</Authors>
+    <Company>Personal</Company>
+    <Description>Sets the Title for all images in certain Office document types.</Description>
+    <PackageTags>image;office;automation;a11y;alttext</PackageTags>
+  </PropertyGroup>
+
   <ItemGroup>
     <PackageReference Include="Azure.AI.Vision.ImageAnalysis" Version="1.0.0" />
     <PackageReference Include="DocumentFormat.OpenXml" Version="3.3.0" />
