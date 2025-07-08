@@ -7,7 +7,7 @@ namespace ImageAnalyzerProgram
     {
         private readonly IDocManager _docManager;
         private readonly IImageAnalyzer _imageAnalyzer;
-        private readonly List<ILogger> _loggers; 
+        private readonly List<ILogger> _loggers = new[]; 
 
         public Worker(IDocManager docManager, 
             IImageAnalyzer imageAnalyzer, 
@@ -15,7 +15,10 @@ namespace ImageAnalyzerProgram
         {
             _docManager = docManager ?? throw new ArgumentNullException(nameof(docManager));
             _imageAnalyzer = imageAnalyzer ?? throw new ArgumentNullException(nameof(imageAnalyzer));
-            _loggers = loggers?.ToList() ?? throw new ArgumentNullException(nameof(loggers));
+            if (_loggers != null && !loggers.Any())
+            {
+                _loggers = loggers.ToList();
+            }
         }
 
         public async Task ExecuteProgramAsync(string docPath)
