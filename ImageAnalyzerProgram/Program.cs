@@ -18,6 +18,12 @@ namespace ImageAnalyzerProgram
 
         public static async Task Main(string[] args)
         {
+            _loggers = new List<ILogger>
+                {
+                    new ConsoleLogger(),
+                    new DebugLogger()
+                };
+
             if (args.Length < 3 
                 || string.IsNullOrWhiteSpace(args[0])
                 || string.IsNullOrWhiteSpace(args[1])
@@ -30,11 +36,6 @@ namespace ImageAnalyzerProgram
             {
                 _docPath = args[0];
                 _acsConnectionDetails = new AcsConnectionInfo(args[1], args[2]);
-                _loggers = new List<ILogger>
-                {
-                    new ConsoleLogger(),
-                    new DebugLogger()
-                };
 
                 _worker = new Worker(
                     new OfficeDocManager(
@@ -47,7 +48,6 @@ namespace ImageAnalyzerProgram
                         }),
                     new AcsImageAnalyzer(_acsConnectionDetails),
                     _loggers);
-
                 
                 _loggers?.ForEach(logger => logger.WriteLogMessage($"Executing program with document at {_docPath}"));
                 await _worker.ExecuteProgramAsync(_docPath);
