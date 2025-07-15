@@ -4,8 +4,6 @@ using ImageAnalyzer.DataTypes;
 using ImageAnalyzer.Interfaces;
 using ImageAnalyzer.IO;
 using ImageAnalyzer.Office;
-using ImageAnalyzer.Office.OfficeWithOpenXML.ImageHandlerImplementations;
-using ImageAnalyzer.Office.OfficeWithSystemPackagingIO;
 using ImageAnalyzerProgram.Loggers;
 
 namespace ImageAnalyzerProgram
@@ -41,25 +39,9 @@ namespace ImageAnalyzerProgram
                 _worker = new Worker(
                     new OfficeDocManager(
                         new LocalFileHandler(),
-                        new List<IImageHandler>
-                        {
-                            new SystemPackagingDocImageHandler()
-                        }),
+                        new DocImageHandler()),
                     new AcsImageAnalyzer(_acsConnectionDetails),
                     _loggers);
-
-
-                //_worker = new Worker(
-                //    new OfficeDocManager(
-                //        new LocalFileHandler(),
-                //        new List<IImageHandler>
-                //        {
-                //            new DocxImageHandler(),
-                //            new PptxImageHandler(),
-                //            new XlsxImageHandler()
-                //        }),
-                //    new AcsImageAnalyzer(_acsConnectionDetails),
-                //    _loggers);
 
                 _loggers?.ForEach(logger => logger.WriteLogMessage($"Executing program with document at {_docPath}"));
                 await _worker.ExecuteProgramAsync(_docPath);

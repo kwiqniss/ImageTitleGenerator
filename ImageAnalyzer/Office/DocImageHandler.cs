@@ -3,9 +3,9 @@ using System.Xml;
 using ImageAnalyzer.DataTypes;
 using ImageAnalyzer.Interfaces;
 
-namespace ImageAnalyzer.Office.OfficeWithSystemPackagingIO
+namespace ImageAnalyzer.Office
 {
-    public class SystemPackagingDocImageHandler : IImageHandler
+    public class DocImageHandler : IImageHandler
     {
         public IEnumerable<string> SupportedFileExtensions { get; private set; } = [".docx", ".xlsx", ".pptx"];
 

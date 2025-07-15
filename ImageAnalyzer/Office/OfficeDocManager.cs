@@ -4,18 +4,15 @@ using Path = System.IO.Path;
 
 namespace ImageAnalyzer.Office
 {
-    /* TODO: [dhollowe] we can improve the performance by making sure we don't query every image in the collection 
-     * to compare relId and sheetslideId but instead use them as indexes so we can just loop through the collection once when saving titles.
-     */
     public class OfficeDocManager : IDocManager
     {
         private readonly IFileHandler _fileHandler;
-        private readonly IEnumerable<IImageHandler> _imageHandlers;
+        private readonly IImageHandler _imageHandler;
         
-        public OfficeDocManager(IFileHandler fileHandler, IEnumerable<IImageHandler> imageHandlers)
+        public OfficeDocManager(IFileHandler fileHandler, IImageHandler imageHandler)
         {
             _fileHandler = fileHandler;
-            _imageHandlers = imageHandlers;
+            _imageHandler = imageHandler;
         }
         
         public FileInteractionResult CopyDoc(string sourcePath)
@@ -73,10 +70,7 @@ namespace ImageAnalyzer.Office
         public IEnumerable<DocumentImage> GetImages(string docPath)
         {
             var extension = Path.GetExtension(docPath).ToLowerInvariant();
-            var imageHandler = _imageHandlers.FirstOrDefault(handler => handler.SupportedFileExtensions.Contains(extension));
-            return imageHandler == null 
-                ? Enumerable.Empty<DocumentImage>() 
-                : imageHandler.GetImages(docPath);
+            return _imageHandler.GetImages(docPath);
         }
 
         public FileInteractionResult SaveTitles(IEnumerable<DocumentImage> images, string docPath)
@@ -91,18 +85,16 @@ namespace ImageAnalyzer.Office
             }
 
             var extension = Path.GetExtension(docPath).ToLowerInvariant();
-            var imageHandler = _imageHandlers.FirstOrDefault(handler =>
-                handler.SupportedFileExtensions.Contains(extension));
 
             try
             {
-                return imageHandler == null 
+                return _imageHandler == null 
                     ? new FileInteractionResult
                         {
                             IsSuccess = false,
                             Message = $"No handler found for file type: {extension}"
                         }
-                    : imageHandler.SaveImageTitles(images, docPath);
+                    : _imageHandler.SaveImageTitles(images, docPath);
             }
             catch (Exception ex)
             {

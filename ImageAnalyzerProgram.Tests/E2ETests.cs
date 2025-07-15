@@ -5,8 +5,6 @@ using ImageAnalyzer.IO;
 using ImageAnalyzer.Office;
 using ImageAnalyzer.DataTypes;
 using ImageAnalyzerProgram.Loggers;
-using ImageAnalyzer.Office.OfficeWithOpenXML.ImageHandlerImplementations;
-using ImageAnalyzer.Office.OfficeWithSystemPackagingIO;
 
 namespace ImageAnalyzerProgram.Tests
 {
@@ -25,24 +23,9 @@ namespace ImageAnalyzerProgram.Tests
             _worker = new Worker(
                 new OfficeDocManager(
                     new LocalFileHandler(),
-                    new List<IImageHandler>
-                    {
-                        new SystemPackagingDocImageHandler()
-                    }),
+                    new DocImageHandler()),
                 new AcsImageAnalyzer(new AcsConnectionInfo(ACS_ENDPOINT, ACS_API_KEY)),
                 new List<ILogger> { new Mock<ILogger>().Object });
-
-            //_worker = new Worker(
-            //    new OfficeDocManager(
-            //        new LocalFileHandler(),
-            //        new List<IImageHandler> 
-            //        { 
-            //            new DocxImageHandler(), 
-            //            new PptxImageHandler(), 
-            //            new XlsxImageHandler() 
-            //        }), 
-            //    new AcsImageAnalyzer(new AcsConnectionInfo(ACS_ENDPOINT, ACS_API_KEY)),
-            //    new List<ILogger> { new Mock<ILogger>().Object }); 
         }
 
         [TestMethod]
