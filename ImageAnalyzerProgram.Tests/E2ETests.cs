@@ -5,6 +5,7 @@ using ImageAnalyzer.IO;
 using ImageAnalyzer.DocumentInteractions;
 using ImageAnalyzer.DataTypes;
 using ImageAnalyzerProgram.Loggers;
+using System.Diagnostics;
 
 namespace ImageAnalyzerProgram.Tests
 {
@@ -28,24 +29,26 @@ namespace ImageAnalyzerProgram.Tests
                     new DocImageHandler()),
                 new AcsImageAnalyzer(new AcsConnectionInfo(configuration["Acs:Endpoint"], configuration["Acs:ApiKey"])),
                 new List<ILogger> { new Mock<ILogger>().Object });
+
+            Process.Start("explorer.exe", "SampleFiles"); // Open the SampleFiles directory in File Explorer for easy access
         }
 
         [TestMethod]
         public async Task TestDocxAsync()
         {
-            await _worker.ExecuteProgramAsync(@"C:\Users\dhollowe\Documents\OfficeDocImagePlayground\sample.docx");
+            await _worker.ExecuteProgramAsync(@"SampleFiles\sample.docx");
         }
 
         [TestMethod]
         public async Task TestPptxAsync()
         {
-            await _worker.ExecuteProgramAsync(@"C:\Users\dhollowe\Documents\OfficeDocImagePlayground\sample.pptx");
+            await _worker.ExecuteProgramAsync(@"SampleFiles\sample.pptx");
         }
 
         [TestMethod]
         public async Task TestXlsxAsync()
         {
-            await _worker.ExecuteProgramAsync(@"C:\Users\dhollowe\Documents\OfficeDocImagePlayground\sample.xlsx");
+            await _worker.ExecuteProgramAsync(@"SampleFiles\sample.xlsx");
         }
     }
 }
