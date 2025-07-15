@@ -1,8 +1,9 @@
 ﻿using DocumentFormat.OpenXml.Packaging;
 using ImageAnalyzer.DataTypes;
 using DocumentFormat.OpenXml.Drawing;
+using ImageAnalyzer.Office.OfficeWithOpenXML;
 
-namespace ImageAnalyzer.Office.ImageHandlerImplementations
+namespace ImageAnalyzer.Office.OfficeWithOpenXML.ImageHandlerImplementations
 {
     public class XlsxImageHandler: OfficeDocImageHandler
     {

@@ -4,7 +4,7 @@ using DocumentFormat.OpenXml.Packaging;
 using ImageAnalyzer.DataTypes;
 using ImageAnalyzer.Interfaces;
 
-namespace ImageAnalyzer.Office
+namespace ImageAnalyzer.Office.OfficeWithOpenXML
 {
     public abstract class OfficeDocImageHandler: IImageHandler
     {

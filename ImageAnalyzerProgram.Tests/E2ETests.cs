@@ -4,8 +4,9 @@ using ImageAnalyzer.Interfaces;
 using ImageAnalyzer.IO;
 using ImageAnalyzer.Office;
 using ImageAnalyzer.DataTypes;
-using ImageAnalyzer.Office.ImageHandlerImplementations;
 using ImageAnalyzerProgram.Loggers;
+using ImageAnalyzer.Office.OfficeWithOpenXML.ImageHandlerImplementations;
+using ImageAnalyzer.Office.OfficeWithSystemPackagingIO;
 
 namespace ImageAnalyzerProgram.Tests
 {
@@ -19,17 +20,29 @@ namespace ImageAnalyzerProgram.Tests
 
         public E2ETests()
         {
+            //new List<ILogger> { new DebugLogger() });
+
             _worker = new Worker(
                 new OfficeDocManager(
                     new LocalFileHandler(),
-                    new List<IImageHandler> 
-                    { 
-                        new DocxImageHandler(), 
-                        new PptxImageHandler(), 
-                        new XlsxImageHandler() 
-                    }), 
+                    new List<IImageHandler>
+                    {
+                        new SystemPackagingDocImageHandler()
+                    }),
                 new AcsImageAnalyzer(new AcsConnectionInfo(ACS_ENDPOINT, ACS_API_KEY)),
-                new List<ILogger> { new Mock<ILogger>().Object }); //new List<ILogger> { new DebugLogger() });
+                new List<ILogger> { new Mock<ILogger>().Object });
+
+            //_worker = new Worker(
+            //    new OfficeDocManager(
+            //        new LocalFileHandler(),
+            //        new List<IImageHandler> 
+            //        { 
+            //            new DocxImageHandler(), 
+            //            new PptxImageHandler(), 
+            //            new XlsxImageHandler() 
+            //        }), 
+            //    new AcsImageAnalyzer(new AcsConnectionInfo(ACS_ENDPOINT, ACS_API_KEY)),
+            //    new List<ILogger> { new Mock<ILogger>().Object }); 
         }
 
         [TestMethod]

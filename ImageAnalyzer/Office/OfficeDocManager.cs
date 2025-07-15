@@ -17,6 +17,7 @@ namespace ImageAnalyzer.Office
             _fileHandler = fileHandler;
             _imageHandlers = imageHandlers;
         }
+        
         public FileInteractionResult CopyDoc(string sourcePath)
         {
             if (string.IsNullOrWhiteSpace(sourcePath))

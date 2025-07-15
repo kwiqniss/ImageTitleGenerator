@@ -1,8 +1,9 @@
 ﻿using DocumentFormat.OpenXml.Drawing;
 using DocumentFormat.OpenXml.Packaging;
 using ImageAnalyzer.DataTypes;
+using ImageAnalyzer.Office.OfficeWithOpenXML;
 
-namespace ImageAnalyzer.Office.ImageHandlerImplementations
+namespace ImageAnalyzer.Office.OfficeWithOpenXML.ImageHandlerImplementations
 {
     public class PptxImageHandler: OfficeDocImageHandler
     {

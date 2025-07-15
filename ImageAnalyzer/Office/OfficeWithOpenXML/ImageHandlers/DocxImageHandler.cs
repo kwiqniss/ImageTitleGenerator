@@ -4,8 +4,9 @@ using DocumentFormat.OpenXml.Drawing.Wordprocessing;
 using DocumentFormat.OpenXml.Packaging;
 using DocumentFormat.OpenXml.Wordprocessing;
 using ImageAnalyzer.DataTypes;
+using ImageAnalyzer.Office.OfficeWithOpenXML;
 
-namespace ImageAnalyzer.Office.ImageHandlerImplementations
+namespace ImageAnalyzer.Office.OfficeWithOpenXML.ImageHandlerImplementations
 {
     public class DocxImageHandler : OfficeDocImageHandler
     {
