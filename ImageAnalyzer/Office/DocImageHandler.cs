@@ -72,8 +72,8 @@ namespace ImageAnalyzer.Office
                             var imageUri = PackUriHelper.ResolvePartUri(part.Uri, rel.TargetUri).ToString();
                             if (imagesByUri.TryGetValue(imageUri, out var docImage))
                             {
-                                el.SetAttribute("name", docImage.Title ?? "Image");
-                                el.SetAttribute("descr", docImage.Title ?? "Image");
+                                el.SetAttribute("title", docImage.Title ?? "Image");
+                                el.SetAttribute("descr", string.Empty);
                                 modified = true;
                             }
                         }
