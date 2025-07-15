@@ -21,13 +21,11 @@ namespace ImageAnalyzerProgram.Tests
                 .AddUserSecrets<E2ETests>() // Uses the UserSecretsId from your .csproj
                 .Build();
 
-            string apiKey = configuration["Acs:ApiKey"];
-
             _worker = new Worker(
                 new DocManager(
                     new LocalFileHandler(),
                     new DocImageHandler()),
-                new AcsImageAnalyzer(new AcsConnectionInfo(ACS_ENDPOINT, apiKey)),
+                new AcsImageAnalyzer(new AcsConnectionInfo(ACS_ENDPOINT, configuration["Acs:ApiKey"])),
                 new List<ILogger> { new Mock<ILogger>().Object });
         }
 
