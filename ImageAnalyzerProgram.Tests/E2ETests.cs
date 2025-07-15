@@ -21,7 +21,6 @@ namespace ImageAnalyzerProgram.Tests
                 .AddUserSecrets<E2ETests>() // Uses the UserSecretsId from your .csproj
                 .Build();
 
-            // Example: Access a secret value
             string apiKey = configuration["Acs:ApiKey"];
 
             _worker = new Worker(
