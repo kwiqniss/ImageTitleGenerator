@@ -101,26 +101,13 @@ namespace ImageAnalyzer.Office
             }
         }
 
-        protected static IEnumerable<PackagePart> GetImageParts(Package package)
+        private static IEnumerable<PackagePart> GetImageParts(Package package)
         {
             foreach (var part in package.GetParts())
             {
                 if (part.ContentType.StartsWith("image/"))
                     yield return part;
             }
-        }
-
-        protected static string GetImageExtension(string contentType)
-        {
-            return contentType switch
-            {
-                "image/png" => ".png",
-                "image/jpeg" => ".jpg",
-                "image/gif" => ".gif",
-                "image/bmp" => ".bmp",
-                "image/tiff" => ".tiff",
-                _ => ".img"
-            };
         }
     }
 }
