@@ -15,6 +15,11 @@ namespace ImageAnalyzerProgram.Tests
     public sealed class E2ETests
     {
         private readonly IWorker _worker;
+
+        static E2ETests()
+        {
+            Process.Start("explorer.exe", "SampleFiles"); // Open the SampleFiles directory in File Explorer for easy access
+        }
         
         public E2ETests()
         {
@@ -29,8 +34,6 @@ namespace ImageAnalyzerProgram.Tests
                     new DocImageHandler()),
                 new AcsImageAnalyzer(new AcsConnectionInfo(configuration["Acs:Endpoint"], configuration["Acs:ApiKey"])),
                 new List<ILogger> { new Mock<ILogger>().Object });
-
-            Process.Start("explorer.exe", "SampleFiles"); // Open the SampleFiles directory in File Explorer for easy access
         }
 
         [TestMethod]
