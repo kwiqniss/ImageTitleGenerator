@@ -1,10 +1,10 @@
-﻿using Microsoft.Extensions.Configuration;
-using Moq;
-using ImageAnalyzer.AI.Acs;
-using ImageAnalyzer.IO;
-using ImageAnalyzer.DocumentInteractions;
+﻿using ImageAnalyzer.AI.Acs;
 using ImageAnalyzer.DataTypes;
+using ImageAnalyzer.DocumentInteractions;
+using ImageAnalyzer.IO;
 using ImageAnalyzerProgram.Loggers;
+using Microsoft.Extensions.Configuration;
+using Moq;
 using System.Diagnostics;
 
 namespace ImageAnalyzerProgram.Tests
