@@ -1,4 +1,5 @@
-﻿using Moq;
+﻿using Microsoft.Extensions.Configuration;
+using Moq;
 using ImageAnalyzer.AI.Acs;
 using ImageAnalyzer.IO;
 using ImageAnalyzer.DocumentInteractions;
@@ -10,20 +11,25 @@ namespace ImageAnalyzerProgram.Tests
     [TestClass]
     public sealed class E2ETests
     {
-        private const string ACS_ENDPOINT = "https://nazaravision.cognitiveservices.azure.com/"; //https://<your-vision-api-endpoint>.cognitiveservices.azure.com/";
-        private const string ACS_API_KEY = "3zLPzIAfN7RjptLzX0k3mAUF1QeDRF8mtxfvywT8fSOeNPkBs5IQJQQJ99BGACYeBjFXJ3w3AAAFACOGBFkq"; // Your Azure Vision API key
-
+        private const string ACS_ENDPOINT = "https://nazaravision.cognitiveservices.azure.com/";
+        private readonly IConfiguration _configuration;
         private readonly IWorker _worker;
 
         public E2ETests()
         {
-            //new List<ILogger> { new DebugLogger() });
+            // Build configuration to include user secrets
+            _configuration = new ConfigurationBuilder()
+                .AddUserSecrets<E2ETests>() // Uses the UserSecretsId from your .csproj
+                .Build();
+
+            // Example: Access a secret value
+            string apiKey = _configuration["Acs:ApiKey"];
 
             _worker = new Worker(
                 new DocManager(
                     new LocalFileHandler(),
                     new DocImageHandler()),
-                new AcsImageAnalyzer(new AcsConnectionInfo(ACS_ENDPOINT, ACS_API_KEY)),
+                new AcsImageAnalyzer(new AcsConnectionInfo(ACS_ENDPOINT, apiKey)),
                 new List<ILogger> { new Mock<ILogger>().Object });
         }
 
