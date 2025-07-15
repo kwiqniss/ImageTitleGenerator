@@ -69,7 +69,6 @@ namespace ImageAnalyzer.Office
 
         public IEnumerable<DocumentImage> GetImages(string docPath)
         {
-            var extension = Path.GetExtension(docPath).ToLowerInvariant();
             return _imageHandler.GetImages(docPath);
         }
 
@@ -84,17 +83,9 @@ namespace ImageAnalyzer.Office
                 };
             }
 
-            var extension = Path.GetExtension(docPath).ToLowerInvariant();
-
             try
             {
-                return _imageHandler == null 
-                    ? new FileInteractionResult
-                        {
-                            IsSuccess = false,
-                            Message = $"No handler found for file type: {extension}"
-                        }
-                    : _imageHandler.SaveImageTitles(images, docPath);
+                return _imageHandler.SaveImageTitles(images, docPath);
             }
             catch (Exception ex)
             {
