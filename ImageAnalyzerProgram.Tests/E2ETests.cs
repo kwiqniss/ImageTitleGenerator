@@ -12,18 +12,17 @@ namespace ImageAnalyzerProgram.Tests
     public sealed class E2ETests
     {
         private const string ACS_ENDPOINT = "https://nazaravision.cognitiveservices.azure.com/";
-        private readonly IConfiguration _configuration;
         private readonly IWorker _worker;
 
         public E2ETests()
         {
             // Build configuration to include user secrets
-            _configuration = new ConfigurationBuilder()
+            var configuration = new ConfigurationBuilder()
                 .AddUserSecrets<E2ETests>() // Uses the UserSecretsId from your .csproj
                 .Build();
 
             // Example: Access a secret value
-            string apiKey = _configuration["Acs:ApiKey"];
+            string apiKey = configuration["Acs:ApiKey"];
 
             _worker = new Worker(
                 new DocManager(
