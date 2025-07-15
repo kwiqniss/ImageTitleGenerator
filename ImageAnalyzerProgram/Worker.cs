@@ -24,8 +24,12 @@ namespace ImageAnalyzerProgram
 
         public async Task ExecuteProgramAsync(string docPath)
         {
+            _loggers.ForEach(logger => logger.WriteLogMessage($"Starting job with document path: {docPath}"));
+
             // Copy the doc
             var copyResult = _docManager.CopyDoc(docPath);
+            docPath = string.Empty; // to prevent saving over the original
+            
             if (!copyResult.IsSuccess)
             {
                 _loggers.ForEach(logger => logger.WriteLogError(copyResult.Message, copyResult.InteractionException));
@@ -36,6 +40,7 @@ namespace ImageAnalyzerProgram
                 _loggers.ForEach(logger => logger.WriteLogError("There was no result from the copy operation.", null));
                 return;
             }
+
             var docCopyPath = copyResult.Value;
             _loggers.ForEach(logger => logger.WriteLogMessage($"Document copied to: {docCopyPath}"));
 
