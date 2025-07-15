@@ -1,4 +1,5 @@
 using System.IO.Packaging;
+using System.Xml;
 using ImageAnalyzer.DataTypes;
 using ImageAnalyzer.Interfaces;
 
@@ -43,7 +44,7 @@ namespace ImageAnalyzer.Office.OfficeWithSystemPackagingIO
                     if (!part.ContentType.EndsWith("xml", StringComparison.OrdinalIgnoreCase))
                         continue;
 
-                    var xmlDoc = new System.Xml.XmlDocument();
+                    var xmlDoc = new XmlDocument();
                     using (var stream = part.GetStream(FileMode.Open, FileAccess.ReadWrite))
                     {
                         if (stream.Length == 0) continue;
@@ -51,7 +52,7 @@ namespace ImageAnalyzer.Office.OfficeWithSystemPackagingIO
                     }
 
                     bool modified = false;
-                    var nsmgr = new System.Xml.XmlNamespaceManager(xmlDoc.NameTable);
+                    var nsmgr = new XmlNamespaceManager(xmlDoc.NameTable);
                     nsmgr.AddNamespace("a", "http://schemas.openxmlformats.org/drawingml/2006/main");
                     nsmgr.AddNamespace("r", "http://schemas.openxmlformats.org/officeDocument/2006/relationships");
                     nsmgr.AddNamespace("wp", "http://schemas.openxmlformats.org/drawingml/2006/wordprocessingDrawing");
@@ -59,76 +60,29 @@ namespace ImageAnalyzer.Office.OfficeWithSystemPackagingIO
                     nsmgr.AddNamespace("xdr", "http://schemas.openxmlformats.org/drawingml/2006/spreadsheetDrawing");
                     nsmgr.AddNamespace("p", "http://schemas.openxmlformats.org/presentationml/2006/main");
 
-                    // 1. Word: <wp:docPr>
-                    var docPrNodes = xmlDoc.SelectNodes("//wp:docPr", nsmgr);
-                    if (docPrNodes != null)
+                    var xmlNodes = xmlDoc.SelectNodes("//wp:docPr | //p:cNvPr | //xdr:cNvPr", nsmgr);
+                    if (xmlNodes != null)
                     {
-                        foreach (System.Xml.XmlElement docPr in docPrNodes)
+                        foreach (XmlElement docPr in xmlNodes)
                         {
-                            // Find the following a:blip
-                            var blip = docPr.ParentNode?.SelectSingleNode(".//a:blip", nsmgr) as System.Xml.XmlElement;
+                            var blip = 
+                                docPr.ParentNode?.SelectSingleNode(".//a:blip", nsmgr) as XmlElement 
+                                ?? docPr.ParentNode?.ParentNode?.SelectSingleNode(".//a:blip | .//xdr:blip", nsmgr) as XmlElement;
                             if (blip == null) continue;
+
                             var relId = blip.GetAttribute("r:embed");
                             if (string.IsNullOrEmpty(relId))
                                 relId = blip.GetAttribute("r:link");
                             if (string.IsNullOrEmpty(relId)) continue;
+                            
                             var rel = part.GetRelationship(relId);
                             if (rel == null) continue;
-                            var imageUri = System.IO.Packaging.PackUriHelper.ResolvePartUri(part.Uri, rel.TargetUri).ToString();
+                            
+                            var imageUri = PackUriHelper.ResolvePartUri(part.Uri, rel.TargetUri).ToString();
                             if (imagesByUri.TryGetValue(imageUri, out var docImage))
                             {
                                 docPr.SetAttribute("name", docImage.Title ?? "Image");
                                 docPr.SetAttribute("descr", docImage.Title ?? "Image");
-                                modified = true;
-                            }
-                        }
-                    }
-
-                    // 2. PowerPoint: <p:cNvPr>
-                    var cNvPrNodesPpt = xmlDoc.SelectNodes("//p:cNvPr", nsmgr);
-                    if (cNvPrNodesPpt != null)
-                    {
-                        foreach (System.Xml.XmlElement cNvPr in cNvPrNodesPpt)
-                        {
-                            // Find the following a:blip
-                            var blip = cNvPr.ParentNode?.ParentNode?.SelectSingleNode(".//a:blip", nsmgr) as System.Xml.XmlElement;
-                            if (blip == null) continue;
-                            var relId = blip.GetAttribute("r:embed");
-                            if (string.IsNullOrEmpty(relId))
-                                relId = blip.GetAttribute("r:link");
-                            if (string.IsNullOrEmpty(relId)) continue;
-                            var rel = part.GetRelationship(relId);
-                            if (rel == null) continue;
-                            var imageUri = System.IO.Packaging.PackUriHelper.ResolvePartUri(part.Uri, rel.TargetUri).ToString();
-                            if (imagesByUri.TryGetValue(imageUri, out var docImage))
-                            {
-                                cNvPr.SetAttribute("name", docImage.Title ?? "Image");
-                                cNvPr.SetAttribute("descr", docImage.Title ?? "Image");
-                                modified = true;
-                            }
-                        }
-                    }
-
-                    // 3. Excel: <xdr:cNvPr>
-                    var cNvPrNodesXlsx = xmlDoc.SelectNodes("//xdr:cNvPr", nsmgr);
-                    if (cNvPrNodesXlsx != null)
-                    {
-                        foreach (System.Xml.XmlElement cNvPr in cNvPrNodesXlsx)
-                        {
-                            // Find the following xdr:blip
-                            var blip = cNvPr.ParentNode?.ParentNode?.SelectSingleNode(".//a:blip | .//xdr:blip", nsmgr) as System.Xml.XmlElement;
-                            if (blip == null) continue;
-                            var relId = blip.GetAttribute("r:embed");
-                            if (string.IsNullOrEmpty(relId))
-                                relId = blip.GetAttribute("r:link");
-                            if (string.IsNullOrEmpty(relId)) continue;
-                            var rel = part.GetRelationship(relId);
-                            if (rel == null) continue;
-                            var imageUri = System.IO.Packaging.PackUriHelper.ResolvePartUri(part.Uri, rel.TargetUri).ToString();
-                            if (imagesByUri.TryGetValue(imageUri, out var docImage))
-                            {
-                                cNvPr.SetAttribute("name", docImage.Title ?? "Image");
-                                cNvPr.SetAttribute("descr", docImage.Title ?? "Image");
                                 modified = true;
                             }
                         }
