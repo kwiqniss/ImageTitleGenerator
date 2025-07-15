@@ -8,12 +8,13 @@ using ImageAnalyzerProgram.Loggers;
 
 namespace ImageAnalyzerProgram.Tests
 {
+    // TODO: Must setup user secrets.json file and include the following keys: "Acs:Endpoint", "Acs:ApiKey" -https://learn.microsoft.com/en-us/aspnet/core/security/app-secrets
+
     [TestClass]
     public sealed class E2ETests
     {
-        private const string ACS_ENDPOINT = "https://nazaravision.cognitiveservices.azure.com/";
         private readonly IWorker _worker;
-
+        
         public E2ETests()
         {
             // Build configuration to include user secrets
@@ -25,7 +26,7 @@ namespace ImageAnalyzerProgram.Tests
                 new DocManager(
                     new LocalFileHandler(),
                     new DocImageHandler()),
-                new AcsImageAnalyzer(new AcsConnectionInfo(ACS_ENDPOINT, configuration["Acs:ApiKey"])),
+                new AcsImageAnalyzer(new AcsConnectionInfo(configuration["Acs:Endpoint"], configuration["Acs:ApiKey"])),
                 new List<ILogger> { new Mock<ILogger>().Object });
         }
 
