@@ -8,18 +8,14 @@
 
         public string Title { get; set; }
 
-        public int SheetSlideIndex { get; private set; }
-
         internal DocumentImage(
             Stream? imageStream
             , string relId
-            , string title = "DefaultTitle"
-            , int sheetSlideIndex = -1)
+            , string title = "DefaultTitle")
         {
             ImageStream = imageStream;
             RelId = relId;
             Title = $"{title} - relId#: {relId}";
-            SheetSlideIndex = sheetSlideIndex;
         }
     }
 }

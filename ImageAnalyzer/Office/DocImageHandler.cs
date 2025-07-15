@@ -7,8 +7,6 @@ namespace ImageAnalyzer.Office
 {
     public class DocImageHandler : IImageHandler
     {
-        public IEnumerable<string> SupportedFileExtensions { get; private set; } = [".docx", ".xlsx", ".pptx"];
-
         public IEnumerable<DocumentImage> GetImages(string docPath)
         {
             using var package = Package.Open(docPath, FileMode.Open, FileAccess.Read);
@@ -21,9 +19,7 @@ namespace ImageAnalyzer.Office
                 yield return new DocumentImage(
                     ms,
                     part.Uri.ToString(),
-                    $"Image{++index}",
-                    -1
-                );
+                    $"Image{++index}");
             }
         }
 
@@ -32,8 +28,6 @@ namespace ImageAnalyzer.Office
             try
             {
                 using var package = Package.Open(docPath, FileMode.Open, FileAccess.ReadWrite);
-
-                // Build a lookup for quick access by part URI
                 var imagesByUri = images
                     .Where(img => !string.IsNullOrEmpty(img.RelId))
                     .ToDictionary(img => img.RelId, img => img);
@@ -62,16 +56,14 @@ namespace ImageAnalyzer.Office
                     var xmlNodes = xmlDoc.SelectNodes("//wp:docPr | //p:cNvPr | //xdr:cNvPr", nsmgr);
                     if (xmlNodes != null)
                     {
-                        foreach (XmlElement docPr in xmlNodes)
+                        foreach (XmlElement el in xmlNodes)
                         {
                             var blip = 
-                                docPr.ParentNode?.SelectSingleNode(".//a:blip", nsmgr) as XmlElement 
-                                ?? docPr.ParentNode?.ParentNode?.SelectSingleNode(".//a:blip | .//xdr:blip", nsmgr) as XmlElement;
+                                el.ParentNode?.SelectSingleNode(".//a:blip", nsmgr) as XmlElement 
+                                ?? el.ParentNode?.ParentNode?.SelectSingleNode(".//a:blip | .//xdr:blip", nsmgr) as XmlElement;
                             if (blip == null) continue;
 
-                            var relId = blip.GetAttribute("r:embed");
-                            if (string.IsNullOrEmpty(relId))
-                                relId = blip.GetAttribute("r:link");
+                            var relId = blip.GetAttribute("r:embed") ?? blip.GetAttribute("r:link");
                             if (string.IsNullOrEmpty(relId)) continue;
                             
                             var rel = part.GetRelationship(relId);
@@ -80,8 +72,8 @@ namespace ImageAnalyzer.Office
                             var imageUri = PackUriHelper.ResolvePartUri(part.Uri, rel.TargetUri).ToString();
                             if (imagesByUri.TryGetValue(imageUri, out var docImage))
                             {
-                                docPr.SetAttribute("name", docImage.Title ?? "Image");
-                                docPr.SetAttribute("descr", docImage.Title ?? "Image");
+                                el.SetAttribute("name", docImage.Title ?? "Image");
+                                el.SetAttribute("descr", docImage.Title ?? "Image");
                                 modified = true;
                             }
                         }
