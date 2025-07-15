@@ -19,7 +19,6 @@ namespace ImageAnalyzer.Office
                 part.GetStream().CopyTo(ms);
                 ms.Position = 0;
                 yield return new DocumentImage(
-                    GetImageExtension(part.ContentType),
                     ms,
                     part.Uri.ToString(),
                     $"Image{++index}",
