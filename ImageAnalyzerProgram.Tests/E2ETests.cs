@@ -1,8 +1,7 @@
 ﻿using Moq;
 using ImageAnalyzer.AI.Acs;
-using ImageAnalyzer.Interfaces;
 using ImageAnalyzer.IO;
-using ImageAnalyzer.Office;
+using ImageAnalyzer.DocumentInteractions;
 using ImageAnalyzer.DataTypes;
 using ImageAnalyzerProgram.Loggers;
 
@@ -21,7 +20,7 @@ namespace ImageAnalyzerProgram.Tests
             //new List<ILogger> { new DebugLogger() });
 
             _worker = new Worker(
-                new OfficeDocManager(
+                new DocManager(
                     new LocalFileHandler(),
                     new DocImageHandler()),
                 new AcsImageAnalyzer(new AcsConnectionInfo(ACS_ENDPOINT, ACS_API_KEY)),

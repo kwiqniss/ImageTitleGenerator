@@ -1,5 +1,4 @@
 ﻿using ImageAnalyzer.DataTypes;
-using ImageAnalyzer.Interfaces;
 
 namespace ImageAnalyzer.IO
 {

@@ -1,9 +1,8 @@
 using System.IO.Packaging;
 using System.Xml;
 using ImageAnalyzer.DataTypes;
-using ImageAnalyzer.Interfaces;
 
-namespace ImageAnalyzer.Office
+namespace ImageAnalyzer.DocumentInteractions
 {
     public class DocImageHandler : IImageHandler
     {

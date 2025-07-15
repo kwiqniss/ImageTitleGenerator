@@ -1,9 +1,8 @@
 ﻿// See https://aka.ms/new-console-template for more information
 using ImageAnalyzer.AI.Acs;
 using ImageAnalyzer.DataTypes;
-using ImageAnalyzer.Interfaces;
 using ImageAnalyzer.IO;
-using ImageAnalyzer.Office;
+using ImageAnalyzer.DocumentInteractions;
 using ImageAnalyzerProgram.Loggers;
 
 namespace ImageAnalyzerProgram
@@ -37,7 +36,7 @@ namespace ImageAnalyzerProgram
                 _acsConnectionDetails = new AcsConnectionInfo(args[1], args[2]);
 
                 _worker = new Worker(
-                    new OfficeDocManager(
+                    new DocManager(
                         new LocalFileHandler(),
                         new DocImageHandler()),
                     new AcsImageAnalyzer(_acsConnectionDetails),

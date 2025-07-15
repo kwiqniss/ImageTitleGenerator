@@ -1,5 +1,6 @@
-﻿using ImageAnalyzer.DataTypes;
-using ImageAnalyzer.Interfaces;
+﻿using ImageAnalyzer.AI;
+using ImageAnalyzer.DataTypes;
+using ImageAnalyzer.DocumentInteractions;
 using ImageAnalyzerProgram.Loggers;
 
 namespace ImageAnalyzerProgram

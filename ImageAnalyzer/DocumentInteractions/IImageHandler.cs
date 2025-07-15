@@ -1,10 +1,9 @@
 ﻿using ImageAnalyzer.DataTypes;
 
-namespace ImageAnalyzer.Interfaces
+namespace ImageAnalyzer.DocumentInteractions
 {
-    public interface IDocManager
+    public interface IImageHandler
     {
-        public FileInteractionResult CopyDoc(string sourcePath);
         public IEnumerable<DocumentImage> GetImages(string docPath);
         public FileInteractionResult SaveImageTitles(IEnumerable<DocumentImage> images, string docPath);
     }

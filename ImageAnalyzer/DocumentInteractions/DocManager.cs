@@ -1,15 +1,15 @@
 using ImageAnalyzer.DataTypes;
-using ImageAnalyzer.Interfaces;
+using ImageAnalyzer.IO;
 using Path = System.IO.Path;
 
-namespace ImageAnalyzer.Office
+namespace ImageAnalyzer.DocumentInteractions
 {
-    public class OfficeDocManager : IDocManager
+    public class DocManager : IDocManager
     {
         private readonly IFileHandler _fileHandler;
         private readonly IImageHandler _imageHandler;
         
-        public OfficeDocManager(IFileHandler fileHandler, IImageHandler imageHandler)
+        public DocManager(IFileHandler fileHandler, IImageHandler imageHandler)
         {
             _fileHandler = fileHandler;
             _imageHandler = imageHandler;

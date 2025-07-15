@@ -1,7 +1,6 @@
 ﻿using Azure;
 using Azure.AI.Vision.ImageAnalysis;
 using ImageAnalyzer.DataTypes;
-using ImageAnalyzer.Interfaces;
 
 namespace ImageAnalyzer.AI.Acs
 {

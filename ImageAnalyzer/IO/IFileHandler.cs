@@ -1,6 +1,6 @@
 ﻿using ImageAnalyzer.DataTypes;
 
-namespace ImageAnalyzer.Interfaces
+namespace ImageAnalyzer.IO
 {
     public interface IFileHandler
     {
