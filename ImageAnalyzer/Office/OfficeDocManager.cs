@@ -73,7 +73,7 @@ namespace ImageAnalyzer.Office
             return _imageHandler.GetImages(docPath);
         }
 
-        public FileInteractionResult SaveTitles(IEnumerable<DocumentImage> images, string docPath)
+        public FileInteractionResult SaveImageTitles(IEnumerable<DocumentImage> images, string docPath)
         {
             if (images == null || string.IsNullOrWhiteSpace(docPath))
             {

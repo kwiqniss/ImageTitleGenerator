@@ -86,7 +86,7 @@ namespace ImageAnalyzerProgram
 
         private FileInteractionResult SaveNewImageTitles(IEnumerable<DocumentImage> images, string docPath)
         {
-            return _docManager.SaveTitles(
+            return _docManager.SaveImageTitles(
                 images,
                 docPath);
         }
