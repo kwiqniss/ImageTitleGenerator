@@ -29,9 +29,7 @@ namespace ImageAnalyzerProgram.Tests
                 .Build();
 
             _worker = new Worker(
-                new DocManager(
-                    new LocalFileHandler(),
-                    new DocImageHandler()),
+                new DocManager(new LocalFileHandler()),
                 new AcsImageAnalyzer(new AcsConnectionInfo(configuration["Acs:Endpoint"], configuration["Acs:ApiKey"])),
                 new List<ILogger> { new Mock<ILogger>().Object });
         }

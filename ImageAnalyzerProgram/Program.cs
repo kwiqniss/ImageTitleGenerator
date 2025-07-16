@@ -36,9 +36,7 @@ namespace ImageAnalyzerProgram
                 _acsConnectionDetails = new AcsConnectionInfo(args[1], args[2]);
 
                 _worker = new Worker(
-                    new DocManager(
-                        new LocalFileHandler(),
-                        new DocImageHandler()),
+                    new DocManager(new LocalFileHandler()),
                     new AcsImageAnalyzer(_acsConnectionDetails),
                     _loggers);
 
