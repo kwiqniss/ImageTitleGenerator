@@ -10,6 +10,7 @@ using System.Diagnostics;
 namespace ImageAnalyzerProgram.Tests
 {
     // TODO: Must setup user secrets.json file and include the following keys: "Acs:Endpoint", "Acs:ApiKey" -https://learn.microsoft.com/en-us/aspnet/core/security/app-secrets
+    // TODO: Add tests for confirming the title was set for each image in the document copies.
 
     [TestClass]
     public sealed class E2ETests
