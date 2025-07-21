@@ -132,8 +132,8 @@ namespace ImageAnalyzer.DocumentInteractions
                             var imageUri = PackUriHelper.ResolvePartUri(part.Uri, rel.TargetUri).ToString();
                             if (imagesByUri.TryGetValue(imageUri, out var docImage))
                             {
-                                el.SetAttribute("title", docImage.Title ?? "Image");
-                                el.SetAttribute("descr", string.Empty);
+                                el.SetAttribute("title", docImage.Title ?? string.Empty);
+                                el.SetAttribute("descr", docImage.Description ?? string.Empty);
                                 modified = true;
                             }
                         }

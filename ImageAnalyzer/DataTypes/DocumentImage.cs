@@ -8,6 +8,8 @@
 
         public string Title { get; set; }
 
+        public string Description { get; set; } = string.Empty;
+
         internal DocumentImage(
             Stream? imageStream
             , string relId
